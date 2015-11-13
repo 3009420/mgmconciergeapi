@@ -7,27 +7,28 @@ var express     = require('express'),
     port        = process.env.PORT || 3000,
     MongoClient = mongodb.MongoClient,
     ObjectId    = require('mongodb').ObjectID,
-    dbUrl       = 'mongodb://blacknight811:B_boy777@ds045021.mongolab.com:45021/mgmconciergedb',
-    assert      = require('assert')
+    assert      = require('assert'),
+    connectInfo = require('./custom_modules/sensitive.js')
 ;
-MongoClient.connect(dbUrl, function(err, db) {
-    assert.equal(null, err);
-    if(err){throw err}
-    console.log("Connected correctly to database server.");
-    var categories = db.collection('categories');
-    console.log(categories);
-    var allCategories = categories.find().toArray();
-
-    app.get('/', function (req,res,next) {
-        console.log('send back some json for home screen');
-        res.send({message: allCategories});
-    });
-
-
-
-
-    db.close();
-});
+//MongoClient.connect(connectInfo.dbConnect, function(err, db) {
+//    assert.equal(null, err);
+//    if(err){throw err}
+//    console.log("Connected correctly to database server.");
+//    var categories = db.collection('categories');
+//    console.log(categories);
+//    var allCategories = categories.find().toArray();
+//
+//    app.get('/', function (req,res,next) {
+//        console.log('send back some json for home screen');
+//        res.send({message: allCategories});
+//    });
+//
+//
+//
+//
+//    db.close();
+//});
+mongoose.connect(connectInfo.dbConnect);
 var insertDocument = function(db, callback, payload) {
     db.collection('concierge_guide').insertOne( payload, function(err, result) {
         assert.equal(err, null);

@@ -8,9 +8,12 @@
     "body-parser": "^1.14.1",
     "express": "^4.13.3",
     "mongodb": "^2.0.45",
+    "mongoose": "^4.2.5",
     "request": "^2.64.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jasmine": "^2.3.2"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
