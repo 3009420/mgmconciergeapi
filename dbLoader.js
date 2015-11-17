@@ -10,7 +10,7 @@ MongoClient.connect(dburl, function (err,db) {
     } else{
         console.log("Connection established to", dburl);
 
-        var collection = db.collection("categories"),
+        var collection = db.collection("categories.ts"),
             shows ={
                 "name":"Shows",
                 "subcategories":[
@@ -58,7 +58,7 @@ MongoClient.connect(dburl, function (err,db) {
                             {"name":"Rock of Ages", "img":"","location":"Venetian","document1":{"name":"Seating Chart","url":""}},
                             {"name":"Menopause The Musical", "img":"","location":"Luxor","document1":{"name":"Seating Chart","url":""}},
                             {"name":"Tony n\" Tina\"s Wedding", "img":"","location":"Bally\"s","document1":{"name":"Seating Chart","url":""}},
-                            {"name":"Raiding the Rock Vault", "img":"","location":"Tropicana","document1":{"name":"Seating Chart","url":""}},
+                            {"name":"Raiding the Rock Vault", "img":"","location":"Tropicana","document1":{"name":"Seating Chart","url":""}}
                         ]
                     },{
                         "name":"Comedy",
@@ -78,7 +78,7 @@ MongoClient.connect(dburl, function (err,db) {
                             {"name":"Jubilee", "img":"","location":"Bally\"s","document1":{"name":"Seating Chart","url":""}},
                             {"name":"Fantasy", "img":"","location":"Luxor","document1":{"name":"Seating Chart","url":""}},
                             {"name":"Beacher\s Madhouse", "img":"","location":"MGM Grand","document1":{"name":"Seating Chart","url":""}},
-                            {"name":"X B"url"esque", "img":"","location":"Flamingo","document1":{"name":"Seating Chart","url":""}},
+                            {"name":"X Burlesque", "img":"","location":"Flamingo","document1":{"name":"Seating Chart","url":""}},
                             {"name":"X Rocks", "img":"","location":"Rio","document1":{"name":"Seating Chart","url":""}},
                             {"name":"Chippendales", "img":"","location":"Rio","document1":{"name":"Seating Chart","url":""}},
                             {"name":"Recycled Percussion", "img":"","location":"The Quad","document1":{"name":"Seating Chart","url":""}},
@@ -115,7 +115,7 @@ MongoClient.connect(dburl, function (err,db) {
 
         collection.insert("shows", function (err,result) {
             if(err){console.log(err);}else{
-                console.log("Inserted documents into the categories collection. The documents inserted with _id are:", result.length,result);
+                console.log("Inserted documents into the categories.ts collection. The documents inserted with _id are:", result.length,result);
             }
             db.close();
         });

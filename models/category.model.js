@@ -17,6 +17,21 @@ var contactName = {
         name: String,
         link: String
     },
+    serviceRequest = {
+        firstName: String,
+        lastName: String,
+        phone: String,
+        email: String,
+        hotel: String,
+        suite: String,
+        serviceDate: Date,
+        occasion: String,
+        numMales: Number,
+        numFemales: Number,
+        dateSent: Date,
+        response: Boolean,
+        contactResponded: contact
+    },
     feature = {
         name: String,
         featuredImage: String,
@@ -52,3 +67,5 @@ var categorySchema = new Schema({
     subcategories:[subCategory],
     listings: [listing]
 });
+
+var serviceRequestSchema = new Schema(serviceRequest);
