@@ -13,6 +13,6 @@ This rewrite is using
   - If
   - JSHint for linting Javascript
     - JSHint-Stylish for better linting error formatting
-  - JSCS for styleguide inforcement
+  - JSCS for styleguide enforcement
   - Nodemon for automatic server restarts after code changes
   - Yargs
