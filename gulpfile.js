@@ -1,10 +1,12 @@
 "use strict";
 var gulp = require('gulp'),
-    $ = require('gulp-load-plugins'),
+    $ = require('gulp-load-plugins')({lazy: true}),
     nodemon = require('gulp-nodemon'),
     mocha = require('gulp-mocha'),
     env = require('gulp-env'),
-    supertest = require('supertest');
+    //supertest = require('supertest'),
+    config = require('./gulp.config')(),
+    args = require('yargs');
 
 
 gulp.task('default', function () {
@@ -27,3 +29,31 @@ gulp.task('test', function () {
     gulp.src('tests/*.js',{read: false})
         .pipe(mocha({reporter: 'nyan'}))
 });
+
+gulp.task('vet', function () {
+    log('Analyzing scripts with JSHint and JSCS');
+    return gulp
+        .src(config.alljs)
+        .pipe($.if(args.verbose, $.print()))
+        .pipe($.jshint())
+        .pipe($.jscs())
+
+        .pipe($.jshint.reporter('jshint-stylish',{verbose:true}))
+        .pipe($.jshint.reporter('fail'))
+});
+
+
+
+//////////////////////
+
+function log (msg){
+    if(typeof (msg)==='object'){
+        for (var item in msg){
+            if (msg.hasOwnProperty(item)){
+                $.util.log($.util.colors.blue(msg[item]));
+            }
+        }
+    } else{
+        $.util.log($.util.colors.blue(msg));
+    }
+}

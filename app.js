@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var connectInfo = require('./custom_modules/sensitive.js');
 var routes = require('./routes/index');
 var Category = require('./models/category.model');
-var ServiceRequest = require('./models/category.model').ServiceRequest;
+//var ServiceRequest = require('./models/category.model').ServiceRequest;
 
 var categoryRouter = require('./routes/categoryRoutes')(Category);
 
@@ -53,14 +53,6 @@ app.get('/', function (req,res) {
     res.send('Welcome to my API :-)');
 });
 app.use('/categories', routes);
-
-
-app.post('/categories', function (req,res,next) {
-    console.log('request on server: ',req.body);
-
-
-
-});
 
 app.listen(port, function () {
     console.log('API is running on port ' + port);

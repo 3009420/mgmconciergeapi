@@ -13,8 +13,8 @@ var mongoose = require('mongoose'),
         numMales: Number,
         numFemales: Number,
         dateSent: Date,
-        response: Boolean,
-        contactResponded: contact
+        response: Boolean
+        //contactResponded: contact
     }
     ;
 

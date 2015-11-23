@@ -34,7 +34,7 @@ var categoryController = function(Category){
                     res.status(500).send({message: err});
                 }else{
                     var returnCategories = [];
-                    categories.forEach(function (element,index,array) {
+                    categories.forEach(function (element) {
                         var newCategory = element.toJSON();
                         newCategory.links = {};
                         newCategory.links.self = 'http://'+req.headers.host+'/api/categories/'+newCategory._id;

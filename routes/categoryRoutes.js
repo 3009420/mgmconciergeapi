@@ -48,7 +48,7 @@ var routes = function (Category) {
                     res.json(req.category);
                 }
             });
-            res.json(category);
+            //res.json(category);
         })
         .patch(function (req,res) {
             if(req.body._id){

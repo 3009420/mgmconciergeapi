@@ -3,11 +3,11 @@ var should = require('should'),
 
 describe('Categories Controller Tests', function () {
     describe('Post', function () {
-        it('should not allow and empty title on poast', function () {
+        it('should not allow and empty title on post', function () {
             var Category = function (category) {
                 this.save = function () {
 
-                }
+                };
             };
             var req = {
                 body: {
