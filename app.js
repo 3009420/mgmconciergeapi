@@ -2,43 +2,70 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var assert = require('assert');
 var connectInfo = require('./custom_modules/sensitive.js');
-var app = express(), port = process.env.PORT || 3000;
-mongoose.connect(connectInfo.dbConnect);
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function () {
+var routes = require('./routes/index');
+var Category = require('./models/category.model');
+var ServiceRequest = require('./models/category.model').ServiceRequest;
+
+var categoryRouter = require('./routes/categoryRoutes')(Category);
+
+
+var db;
+
+if(process.env.ENV ==='Test'){
+    db = mongoose.connect(connectInfo.dbConnectTest);
+}else{
+    db = mongoose.connect(connectInfo.dbConnect);
+}
+var app = express(),
+    port = process.env.PORT || 3000;
+
+
+
+process.on('uncaughtException', function (err) {
+    console.log('There was an uncaught exception! ',err);
+    process.exit(1);
 });
-//var insertDocument = function (db, callback, payload) {
-//    db.collection('concierge_guide').insertOne(payload, function (err, result) {
-//        assert.equal(err, null);
-//        console.log("Inserted a document into the concierge_guide collection.");
-//        callback(result);
-//    });
-//};
-app.use(bodyParser.json());
-app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
+
+//app.use(function (req, res, next) {
+//    res.header("Access-Control-Allow-Origin", "*");
+//    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//    next();
+//});
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json({strict:false}));
+app.use('/api/categories', categoryRouter);
+
+
+
+
+
+
+
+
+//db.on('error', console.error.bind(console, 'connection error:'));
+//db.once('open', function () {
+//});
+
+
+
+app.get('/', function (req,res) {
+    res.send('Welcome to my API :-)');
 });
-app.listen(3000, function () {
+app.use('/categories', routes);
+
+
+app.post('/categories', function (req,res,next) {
+    console.log('request on server: ',req.body);
+
+
+
+});
+
+app.listen(port, function () {
     console.log('API is running on port ' + port);
+    //console.log(Category);
+
 });
-app.get('/shows', function (req, res, next) {
-});
-//app.post('/upload/mainitems', function (req,res,next) {
-//    console.log('request on server: ',req.body);
-//
-//    MongoClient.connect(dbUrl, function(err, db) {
-//        assert.equal(null, err);
-//        console.log("Connected correctly to server.");
-//        insertDocument(db, function () {
-//            db.close();
-//        },req.body);
-//        //db.close();
-//    });
-//
-//}); 
+module.exports = app;
 //# sourceMappingURL=app.js.map

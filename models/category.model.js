@@ -1,36 +1,21 @@
+"use strict";
+
+
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema
 ;
 
 
 
-var contactName = {
+var contact = {
         firstName: String,
-        lastName: String
-    },
-    contact = {
-        name: contactName,
+        lastName: String,
         phone: String,
         email: String
     },
     button = {
         name: String,
         link: String
-    },
-    serviceRequest = {
-        firstName: String,
-        lastName: String,
-        phone: String,
-        email: String,
-        hotel: String,
-        suite: String,
-        serviceDate: Date,
-        occasion: String,
-        numMales: Number,
-        numFemales: Number,
-        dateSent: Date,
-        response: Boolean,
-        contactResponded: contact
     },
     feature = {
         name: String,
@@ -60,12 +45,15 @@ var contactName = {
 
 
 var categorySchema = new Schema({
-    name: String,
-    icon: String,
-    createdOn: Date,
+    createdOn: {type: Date},
+    icon: {type: String},
     updatedOn: {type:Date, default: Date.now},
     subcategories:[subCategory],
+    name: {type: String},
     listings: [listing]
 });
 
-var serviceRequestSchema = new Schema(serviceRequest);
+
+var Category = mongoose.model('Category', categorySchema);
+
+module.exports = Category;

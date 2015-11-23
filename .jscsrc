@@ -29,6 +29,7 @@
 
   "excludeFiles": [
     "test/data/**",
-    "patterns/*"
+    "patterns/*",
+    "node_modules/*"
   ]
 }
